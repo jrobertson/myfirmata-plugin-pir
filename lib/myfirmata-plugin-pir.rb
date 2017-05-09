@@ -32,8 +32,9 @@ class MyFirmataPluginPir
     duration = @duration    
     notifier = @variables[:notifier]
     topic = @variables[:device_id]
-    msg = @settings[:msg] || 'motion'
+    msg = @settings[:msg] || 'motion'    
     pinx = @pinx
+    threshold = @settings[:threshold] || 5
     
     t1 = Time.now - (ChronicDuration.parse(duration) + 10)   
     
@@ -47,9 +48,11 @@ class MyFirmataPluginPir
 
         if Time.now > t1 + ChronicDuration.parse(duration)  then
 
-          notifier.notice \
-              "%s/motion: detected %s times within the past %s" % \
-              [topic, count, duration]
+          if count > threshold then
+            notifier.notice \
+                "%s/motion: detected %s times within the past %s" % \
+                [topic, count, duration]
+          end
           t1 = Time.now
           count = 0
         end        

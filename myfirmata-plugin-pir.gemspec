@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'myfirmata-plugin-pir'
-  s.version = '0.1.0'
+  s.version = '0.1.1'
   s.summary = 'A PIR motion sensing plugin for the MyFirmata gem. Publishes ' + 
     'a message to the SPS broker at a set inteval whenever motion is detected.'
   s.authors = ['James Robertson']
